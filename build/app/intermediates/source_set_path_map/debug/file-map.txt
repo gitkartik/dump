@@ -1,0 +1,12 @@
+com.example.dump.app-core-1.6.0-0 C:\Users\user\.gradle\caches\transforms-3\0cc34e6433f5ac7b70e190ed6ee2aebe\transformed\core-1.6.0\res
+com.example.dump.app-jetified-window-1.0.0-beta04-1 C:\Users\user\.gradle\caches\transforms-3\2e91a406696ac610922015f9240cbb19\transformed\jetified-window-1.0.0-beta04\res
+com.example.dump.app-jetified-annotation-experimental-1.1.0-2 C:\Users\user\.gradle\caches\transforms-3\3c7fcce41925e46be2ba8d4ea80ba930\transformed\jetified-annotation-experimental-1.1.0\res
+com.example.dump.app-jetified-window-java-1.0.0-beta04-3 C:\Users\user\.gradle\caches\transforms-3\f901661c473c5e163a1717ba0e3ced34\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.dump.app-debug-4 C:\Users\user\Desktop\dump\android\app\src\debug\res
+com.example.dump.app-main-5 C:\Users\user\Desktop\dump\android\app\src\main\res
+com.example.dump.app-pngs-6 C:\Users\user\Desktop\dump\build\app\generated\res\pngs\debug
+com.example.dump.app-resValues-7 C:\Users\user\Desktop\dump\build\app\generated\res\resValues\debug
+com.example.dump.app-rs-8 C:\Users\user\Desktop\dump\build\app\generated\res\rs\debug
+com.example.dump.app-mergeDebugResources-9 C:\Users\user\Desktop\dump\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.dump.app-mergeDebugResources-10 C:\Users\user\Desktop\dump\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.dump.app-merged_res-11 C:\Users\user\Desktop\dump\build\app\intermediates\merged_res\debug
