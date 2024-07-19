@@ -1,3 +1,4 @@
+import 'package:dump/payment_page.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
 import 'package:dump/resources/widgets/global_widget.dart';
@@ -81,7 +82,7 @@ class WeightPage extends StatelessWidget {
             SizedBox(height: _mediaQuery.height * 0.01),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                border: Border.all(color: DumpColors.unselectedicncolor),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Column(
@@ -154,12 +155,75 @@ class WeightPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: _mediaQuery.height * 0.02),
-            Spacer(),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: DumpColors.unselectedicncolor),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: ListTile(
+              leading: GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Uploading video'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        content: SingleChildScrollView(
+                          child: IntrinsicHeight(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  height: _mediaQuery.height * 0.005,
+                                  width: double.infinity,
+                                  color: DumpColors.greenaccentcolor,
+                                ),
+                                SizedBox(height: 5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('100%'),
+                                    Text('1/1'),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Icon(
+                  Icons.video_collection_rounded,
+                  color: DumpColors.ambercolor,
+                  size: 45,
+                ),
+              ),
+              title: Text(
+                '10000056154.mp4',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                'video selected successfully',
+                style: TextStyle(color: DumpColors.unselectedicncolor),
+              ),
+            ),
+          ),
+
+
+
+          Spacer(),
             SizedBox(
               width: double.infinity,
               height: _mediaQuery.height * 0.05,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> PaymentPage()));
+                },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                   backgroundColor: Colors.amber,

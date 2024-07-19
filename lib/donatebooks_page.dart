@@ -49,7 +49,25 @@ class DonateBooksPage extends StatelessWidget {
               ),
               SizedBox(height: _mediaQuery.height * 0.02),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Thanks for your response, We will contact you soon",
+                          style: TextStyle(color: DumpColors.blackcolor, fontSize: 24),),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("CLOSE", style: TextStyle(color: DumpColors.blackcolor, fontSize: 16),),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   height: _mediaQuery.height * 0.05,
                   width: double.infinity,

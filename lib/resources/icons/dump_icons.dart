@@ -21,7 +21,10 @@ class DumpIcons {
   static const icnsearch = Icons.search;
   static const icnscan = Icons.document_scanner_outlined;
   static const icnadd = Icons.add;
+  static const icnfilladd = Icons.add_circle_outline;
+  static const icnfillremove = Icons.remove_circle_outline;
   static const icncircle = Icons.circle_outlined;
+  static const icnfillcircle = Icons.circle;
   static const icnorder = Icons.calendar_today_outlined;
   static const incselectedbox = Icons.check_box_outline_blank;
 }

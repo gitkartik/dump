@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dump',
         debugShowCheckedModeBanner: false,
-      home: BeforeLoginPage()
+      home: SplashPage()
     );
   }
 }

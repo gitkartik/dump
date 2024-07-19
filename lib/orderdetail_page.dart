@@ -213,7 +213,7 @@ class OrderDetailPage extends StatelessWidget {
                 SizedBox(height:_mediaQuery.height*0.01),
                 Row(
                   children: [
-                    Icon(Icons.circle, size: 10, color: DumpColors.unselectedicncolor),
+                    Icon(DumpIcons.icnfillcircle, size: 10, color: DumpColors.unselectedicncolor),
                     SizedBox(width: _mediaQuery.width*0.02,),
                     Expanded(child: Text('We do not accept pirated books. Credit and return will not be given for any pirated book found in the parcel.',
                       style: TextStyle(fontSize: 13),)

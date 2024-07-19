@@ -1,3 +1,4 @@
+import 'package:dump/applyoffer_page.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
 import 'package:dump/resources/widgets/global_widget.dart';
@@ -39,7 +40,9 @@ class AddPickupDetails extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ApplyOfferPage()));
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: DumpColors.bluelinkcolor,
                 minimumSize: Size(_mediaQuery.width, 50),
