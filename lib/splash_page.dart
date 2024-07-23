@@ -1,3 +1,4 @@
+import 'package:dump/login_page.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dump/features/home_feature/bottom_navbar.dart';  // Ensure correct path
@@ -10,7 +11,7 @@ class SplashPage extends StatelessWidget {
     Future.delayed(Duration(seconds: 1), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => BottomNavBar()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
     });
 

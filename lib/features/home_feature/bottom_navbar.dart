@@ -55,7 +55,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: pages[_selectedIndex],
       ),
       bottomNavigationBar: SizedBox(
-        height: MediaQuery.of(context).size.width / 5,
+        height: MediaQuery.of(context).size.width / 6,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,

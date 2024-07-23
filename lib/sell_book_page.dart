@@ -3,9 +3,8 @@ import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
 import 'package:dump/resources/widgets/global_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'add_pickupdetails_page.dart';
-import 'generate_pickup_page.dart';
+
 
 class SellBooksPage extends StatefulWidget {
   const SellBooksPage({super.key});
@@ -15,9 +14,80 @@ class SellBooksPage extends StatefulWidget {
 }
 
 class _SellBooksPageState extends State<SellBooksPage> {
+  TextEditingController _controller = TextEditingController();
+  int _bookCount = 1;
+  double _amountPerBook = 20.0;
+
+  void _incrementCount() {
+    setState(() {
+      _bookCount++;
+    });
+  }
+
+  void _decrementCount() {
+    if (_bookCount > 1) {
+      setState(() {
+        _bookCount--;
+      });
+    }
+  }
+
+  void _showBulkSellDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+          title: Text('Do you want to sell books in bulk, Please let us know',
+          style: TextStyle(fontSize: 16),),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Estimated number of books',
+                  hintStyle: TextStyle(color: DumpColors.unselectedicncolor)
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Pincode',
+                    hintStyle: TextStyle(color: DumpColors.unselectedicncolor)
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Comment (optional)',
+                    hintStyle: TextStyle(color: DumpColors.unselectedicncolor)
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: DumpColors.ambercolor,
+              ),
+              child: Text('SUBMIT'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('CANCEL'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _controller = TextEditingController();
     var _mediaQuery = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -35,21 +105,14 @@ class _SellBooksPageState extends State<SellBooksPage> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddPickupDetails(),
-                      ),
-                    );
-                  },
+                  onPressed: _showBulkSellDialog,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: DumpColors.ambercolor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
                     minimumSize: Size(
-                      _mediaQuery.width * 0.3,
+                      _mediaQuery.width * 0.03,
                       _mediaQuery.height * 0.04,
                     ),
                   ),
@@ -68,23 +131,24 @@ class _SellBooksPageState extends State<SellBooksPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
-            child: Row(
-              children: [
-                Container(
-                  height: _mediaQuery.height * 0.06,
-                  width: _mediaQuery.width * 0.75,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black12),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                    child: TextField(
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        hintText: "Enter 13 Digit ISBN",
-                        hintStyle: TextStyle(color: Colors.black12),
-                        border: InputBorder.none,
-                        suffixIcon: IconButton(
+            child: Container(
+              height: _mediaQuery.height * 0.06,
+              width: _mediaQuery.width * 0.90,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black12),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    hintText: "Enter 13 Digit ISBN",
+                    hintStyle: TextStyle(color: Colors.black12),
+                    border: InputBorder.none,
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
                           icon: Icon(DumpIcons.icnscan, size: 20),
                           onPressed: () async {
                             final result = await Navigator.push(
@@ -98,22 +162,23 @@ class _SellBooksPageState extends State<SellBooksPage> {
                             }
                           },
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-                      ),
+                        Container(
+                          height: _mediaQuery.height * 0.06,
+                          width: _mediaQuery.width * 0.15,
+                          color: DumpColors.ambercolor,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(DumpIcons.icnsearch),
+                          ),
+                        ),
+                      ],
                     ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                   ),
                 ),
-                Container(
-                  height: _mediaQuery.height * 0.06,
-                  width: _mediaQuery.width * 0.15,
-                  color: DumpColors.ambercolor,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(DumpIcons.icnsearch),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            )
+
           ),
           Divider(),
           Padding(
@@ -122,11 +187,11 @@ class _SellBooksPageState extends State<SellBooksPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Total Books : 1',
+                  'Total Books : $_bookCount',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Amount : ₹ 20',
+                  'Amount : ₹ ${_bookCount * _amountPerBook}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -203,19 +268,15 @@ class _SellBooksPageState extends State<SellBooksPage> {
                             Spacer(),
                             IconButton(
                               icon: Icon(DumpIcons.icnfillremove, color: DumpColors.bluelinkcolor),
-                              onPressed: () {
-                                // Your remove button logic here
-                              },
+                              onPressed: _decrementCount,
                             ),
                             Text(
-                              '1',
+                              '$_bookCount',
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             IconButton(
                               icon: Icon(DumpIcons.icnfilladd, color: DumpColors.bluelinkcolor),
-                              onPressed: () {
-                                // Your add button logic here
-                              },
+                              onPressed: _incrementCount,
                             ),
                           ],
                         ),
@@ -223,93 +284,17 @@ class _SellBooksPageState extends State<SellBooksPage> {
                     ),
                   ),
                   Positioned(
-                    top: 0,
-                    right: 0,
-                    child: IconButton(
-                      icon: Icon(Icons.delete_outline, color: DumpColors.unselectedicncolor),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            String selectedReason = 'Select Reason';
-                            List<String> reasons = [
-                              'Select Reason',
-                              'Pick up date not suited for me',
-                              'Not worth the value I am getting',
-                              'I changed my mind',
-                              'No one came for pickup',
-                              'My reason is not listed'
-                            ];
-
-                            return StatefulBuilder(
-                              builder: (context, setState) {
-                                return AlertDialog(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.zero,
-                                  ),
-                                  content: Container(
-                                    height: _mediaQuery.height * 0.35,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: _mediaQuery.height * 0.05,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
-                                            border: Border.all(
-                                              color: DumpColors.blackcolor,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: DropdownButton<String>(
-                                              isExpanded: true,
-                                              value: selectedReason,
-                                              hint: Text('Select Reason', style: TextStyle(fontSize: 14)),
-                                              icon: Icon(DumpIcons.icndropdownarrow),
-                                              underline: SizedBox(),
-                                              onChanged: (String? newValue) {
-                                                setState(() {
-                                                  selectedReason = newValue!;
-                                                });
-                                              },
-                                              items: reasons.map<DropdownMenuItem<String>>((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value, style: TextStyle(fontSize: 14)),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                          height: _mediaQuery.height * 0.05,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
-                                            color: DumpColors.appcolor,
-                                          ),
-                                          child: TextButton(
-                                            child: Text(
-                                              'Continue',
-                                              style: TextStyle(color: DumpColors.textcolor),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        );
-                      },
-                    ),
+                    top: 10,
+                    right: 5,
+                    child: InkWell(onTap: (){},
+                      child: ClipRRect(
+                        child: Image.asset('assets/images/delete_icon.png',
+                          height: _mediaQuery.height*0.025,
+                          width: _mediaQuery.width*0.05,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    )
                   ),
                 ],
               ),
@@ -323,23 +308,43 @@ class _SellBooksPageState extends State<SellBooksPage> {
               height: _mediaQuery.height * 0.05,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => GeneratePickupPage()),
-                  );
-                },
+                  if (_bookCount >= 15){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddPickupDetails(),
+                      ),
+                    );
+                } else {
+                    showDialog( context: context,
+                        builder: (BuildContext context){
+                      return AlertDialog(
+                        title: Row(
+                          children: [
+                            CircleAvatar(radius: 22,
+                            child: Image.asset('assets/images/dumplogo.png'),),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text('Minimum selling books\ncount should be 15',
+                              style: TextStyle(fontSize: 18),),
+                            ),
+                          ],
+                        ),
+                      );
+                        });
+                  }
+                  },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  backgroundColor: Colors.amber,
+                    backgroundColor: _bookCount >= 15 ? DumpColors.ambercolor: Colors.grey.shade300
                 ),
                 child: Text(
                   'SELL MY BOOK',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: DumpColors.appcolor,
+                    color: _bookCount >= 15 ? DumpColors.appcolor : Colors.grey,
                   ),
                 ),
               ),

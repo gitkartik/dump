@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,9 +32,11 @@ class LoginPage extends StatelessWidget {
             ),
             TextField(
               decoration: InputDecoration(
-                hintText: '+91 Enter Mobile Number',
+                prefixText: '+91 | ',
+                hintText: 'Enter Mobile Number',
                 hintStyle: TextStyle(color: Colors.grey.shade300),
               ),
+              keyboardType: TextInputType.number,
             ),
             Expanded(
               child: Align(

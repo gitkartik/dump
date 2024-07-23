@@ -1,3 +1,4 @@
+import 'package:dump/address_page.dart';
 import 'package:dump/applyoffer_page.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
@@ -19,7 +20,9 @@ class AddPickupDetails extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.all(16),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressPage()));
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: DumpColors.greenaccentcolor,
                 minimumSize: Size(_mediaQuery.width, 50),

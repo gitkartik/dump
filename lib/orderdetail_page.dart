@@ -3,18 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
 
-class OrderDetailPage extends StatelessWidget {
+class OrderDetailPage extends StatefulWidget {
   final Map<String, String> order;
 
   const OrderDetailPage({super.key, required this.order});
 
+  @override
+  State<OrderDetailPage> createState() => _OrderDetailPageState();
+}
+
+class _OrderDetailPageState extends State<OrderDetailPage> {
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: DumpColors.appcolor,
-        title: Text('Order ID : ${order['orderId']}'),
+        title: Text('Order ID : ${widget.order['orderId']}'),
       ),
       body: SingleChildScrollView (
         child: Column(
@@ -27,8 +32,8 @@ class OrderDetailPage extends StatelessWidget {
                   backgroundColor: DumpColors.ambercolor,
                   child: Icon(DumpIcons.icnorder, color: DumpColors.appcolor, size: 20),
                 ),
-                title: Text('Order ID : ${order['orderId']}',style: TextStyle(fontSize: 14)),
-                subtitle: Text(order['date']!),
+                title: Text('Order ID : ${widget.order['orderId']}',style: TextStyle(fontSize: 14)),
+                subtitle: Text(widget.order['date']!),
               ),
             ),
             Padding(
@@ -44,7 +49,7 @@ class OrderDetailPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Pickup Status', style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(order['status']!, style: TextStyle(color: DumpColors.redcolor)),
+                            Text(widget.order['status']!, style: TextStyle(color: DumpColors.redcolor)),
                           ],
                         ),
                         Column(
@@ -191,6 +196,106 @@ class OrderDetailPage extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      String selectedReason = 'Select Reason';
+                      List<String> reasons = [
+                        'Select Reason',
+                        'Pick up date not suited for me',
+                        'Not worth the value I am getting',
+                        'I changed my mind',
+                        'No one came for pickup',
+                        'My reason is not listed'
+                      ];
+
+                      return StatefulBuilder(
+                        builder: (context, setState) {
+                          final _mediaQuery = MediaQuery.of(context).size;
+
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
+                            content: Container(
+                              height: _mediaQuery.height * 0.35,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: _mediaQuery.height * 0.05,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                        color: DumpColors.blackcolor,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: DropdownButton<String>(
+                                        isExpanded: true,
+                                        value: selectedReason,
+                                        hint: Text('Select Reason', style: TextStyle(fontSize: 14)),
+                                        icon: Icon(DumpIcons.icndropdownarrow),
+                                        underline: SizedBox(),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            selectedReason = newValue!;
+                                          });
+                                        },
+                                        items: reasons.map<DropdownMenuItem<String>>((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value, style: TextStyle(fontSize: 14)),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                  TextField(),
+                                  Spacer(),
+                                  Container(
+                                    height: _mediaQuery.height * 0.05,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: DumpColors.appcolor,
+                                    ),
+                                    child: TextButton(
+                                      child: Text(
+                                        'Continue',
+                                        style: TextStyle(color: DumpColors.textcolor),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: DumpColors.textcolor,
+                  shadowColor: DumpColors.textcolor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: _mediaQuery.height * 0.015),
+                  minimumSize: Size(double.infinity, _mediaQuery.height * 0.05),
+                ),
+                child: Text('CANCEL PICKUP', style: TextStyle(color: DumpColors.blackcolor)),
+              ),
+            ),
             Divider(height:_mediaQuery.height*0.02, thickness: 3,),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10, left: 16),
@@ -302,25 +407,25 @@ class OrderDetailPage extends StatelessWidget {
               subtitle: Text('Video you uploaded for your pickup',
                 style: TextStyle(fontSize: 12, color: DumpColors.unselectedicncolor),),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: ElevatedButton(
-                onPressed: () {
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: DumpColors.textcolor,
-                  shadowColor: DumpColors.textcolor,
-                  side: BorderSide(color: DumpColors.redcolor),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: _mediaQuery.height * 0.015),
-                  minimumSize: Size(double.infinity, _mediaQuery.height * 0.05),
-                ),
-                child: Text('Watch Video', style: TextStyle(color: DumpColors.redcolor)),
-              ),
+      Padding(
+        padding: const EdgeInsets.all(16),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: DumpColors.textcolor,
+            shadowColor: DumpColors.textcolor,
+            side: BorderSide(color: DumpColors.redcolor),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-            Divider(height:_mediaQuery.height*0.02, thickness: 3,),
+            padding: EdgeInsets.symmetric(vertical: _mediaQuery.height * 0.015),
+            minimumSize: Size(double.infinity, _mediaQuery.height * 0.05),
+          ),
+          child: Text('Watch Video', style: TextStyle(color: DumpColors.redcolor)),
+        ),
+      ),
+
+      Divider(height:_mediaQuery.height*0.02, thickness: 3,),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Container( height: _mediaQuery.height*0.1, width: double.infinity,

@@ -17,7 +17,7 @@ class VerifyNumPage extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -8,7 +8,7 @@ class MyEarningPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: setDumpAppBar(context, 'My Earning'),
-      body: Center(child: Image.asset('assets/images/Picture2.png')),
+
     );
   }
 }

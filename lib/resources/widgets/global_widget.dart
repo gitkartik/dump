@@ -1,4 +1,5 @@
 import 'package:dump/address_page.dart';
+import 'package:dump/faqs_page.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ setDumpAppBar(BuildContext context, String appBarTitle) {
   );
 }
 
- setDumpAppBarwithLogo(BuildContext context, String imagepath) {
+ /*setDumpAppBarwithLogo(BuildContext context, String imagepath) {
   var _mediaquery = MediaQuery.of(context).size;
   return AppBar(
     automaticallyImplyLeading: false,
@@ -65,7 +66,7 @@ setDumpAppBar(BuildContext context, String appBarTitle) {
     ],
     backgroundColor: DumpColors.appcolor,
   );
-}
+}*/
 setDumpAppBarwithLogo2(BuildContext context, String imagepath) {
   var _mediaquery = MediaQuery.of(context).size;
   return PreferredSize( preferredSize: Size.fromHeight(75.0),
@@ -80,19 +81,16 @@ setDumpAppBarwithLogo2(BuildContext context, String imagepath) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Current Location', style: TextStyle(fontSize: 12, color: DumpColors.textcolor,)),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom:08),
-                    child: Row(
-                      children: [
-                        Text('Your address', style: TextStyle(fontSize: 14, color: DumpColors.textcolor, fontWeight: FontWeight.bold)),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> AddressPage()));
-                            },
-                          icon: Icon(DumpIcons.icndropdownarrow, size: 24,color: DumpColors.textcolor,),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Text('Your address', style: TextStyle(fontSize: 14, color: DumpColors.textcolor, fontWeight: FontWeight.bold)),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> AddressPage()));
+                          },
+                        icon: Icon(DumpIcons.icndropdownarrow, size: 24,color: DumpColors.textcolor,),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -100,7 +98,16 @@ setDumpAppBarwithLogo2(BuildContext context, String imagepath) {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: Image.asset('assets/images/dumplogo.png', height: _mediaquery.height*0.2, width: _mediaquery.width*0.3,),
+            child:ClipRRect(
+              clipBehavior: Clip.hardEdge,
+              borderRadius: BorderRadius.all(Radius.zero),
+              child: Image.asset(
+                'assets/images/dump_white_logo.png',
+                height: _mediaquery.height * 0.15,
+                width: _mediaquery.width * 0.15,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
         ],
       ),
@@ -114,12 +121,16 @@ setDumpAppBarwithLogo2(BuildContext context, String imagepath) {
           itemBuilder: (BuildContext context) {
             return [
               PopupMenuItem<String>(
-                value: 'FAQ',
-                child: Text('FAQ'),
+                value: 'FAQs',
+                child: TextButton(onPressed:(){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> FAQsPage()));
+                },child: Text('FAQ')),
               ),
               PopupMenuItem<String>(
                 value: 'Help',
-                child: Text('Help'),
+                child: TextButton(onPressed:(){
+
+                },child: Text('Help')),
               ),
             ];
           },

@@ -1,5 +1,10 @@
+import 'package:dump/features/home_feature/bottom_navbar.dart';
+import 'package:dump/home_page.dart';
+import 'package:dump/orderdetail_page.dart';
+import 'package:dump/pickup_page.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/widgets/global_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GeneratePickupPage extends StatelessWidget {
@@ -18,14 +23,17 @@ class GeneratePickupPage extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset('assets/images/dumplogo.png',
-                  height:100,),
-                  SizedBox(height: _mediaQuery.height*0.01),
-                  Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.green,
-                    size: 50,
+                  height:_mediaQuery.height*0.1,),
+                  Container(
+                    height: _mediaQuery.height * 0.1,
+                    width: _mediaQuery.width * 0.15,
+                    child: Image.asset(
+                      'assets/images/pick_genrated_icon.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                SizedBox(height: _mediaQuery.height*0.01),
+
+                  SizedBox(height: _mediaQuery.height*0.01),
                   Text(
                     'Pick up Generated',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,
@@ -90,11 +98,15 @@ class GeneratePickupPage extends StatelessWidget {
             ),
                 SizedBox(height: _mediaQuery.height*0.01),
             Center(
-              child: TextButton(onPressed: (){},
+              child: TextButton(onPressed: (){
+              //  Navigator.push(context, MaterialPageRoute(builder: (context)=> ));
+              },
                   child: Text('GO TO PICKUPS', style: TextStyle(color: DumpColors.bluelinkcolor),)),
             ),
             Center(
-              child: TextButton(onPressed: (){},
+              child: TextButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> BottomNavBar()));
+              },
                   child: Text('GO TO HOME', style: TextStyle(color: DumpColors.bluelinkcolor),)),
             ),
             Container(
