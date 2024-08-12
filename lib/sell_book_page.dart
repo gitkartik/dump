@@ -1,3 +1,4 @@
+import 'package:dump/addbook_page.dart';
 import 'package:dump/qrscanner_page.dart';
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
@@ -32,101 +33,21 @@ class _SellBooksPageState extends State<SellBooksPage> {
     }
   }
 
-  void _showBulkSellDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero,
-          ),
-          title: Text('Do you want to sell books in bulk, Please let us know',
-          style: TextStyle(fontSize: 16),),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Estimated number of books',
-                  hintStyle: TextStyle(color: DumpColors.unselectedicncolor)
-                ),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Pincode',
-                    hintStyle: TextStyle(color: DumpColors.unselectedicncolor)
-                ),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Comment (optional)',
-                    hintStyle: TextStyle(color: DumpColors.unselectedicncolor)
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: DumpColors.ambercolor,
-              ),
-              child: Text('SUBMIT'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('CANCEL'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     var _mediaQuery = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: setDumpAppBarwithLogo2(context, 'imagepath'),
+   appBar: setDumpAppBar(context, 'Sell your books'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Add Books',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                ElevatedButton(
-                  onPressed: _showBulkSellDialog,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: DumpColors.ambercolor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    minimumSize: Size(
-                      _mediaQuery.width * 0.03,
-                      _mediaQuery.height * 0.04,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Sell bulk books',
-                      style: TextStyle(
-                        color: DumpColors.appcolor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: Text(
+              'Add Books',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
@@ -167,7 +88,9 @@ class _SellBooksPageState extends State<SellBooksPage> {
                           width: _mediaQuery.width * 0.15,
                           color: DumpColors.ambercolor,
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> AddBookPage()));
+                            },
                             icon: Icon(DumpIcons.icnsearch),
                           ),
                         ),
@@ -300,12 +223,13 @@ class _SellBooksPageState extends State<SellBooksPage> {
               ),
             ),
           ),
-          Spacer(),
+          Expanded(child: Container()),
+
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
             child: SizedBox(
               width: double.infinity,
-              height: _mediaQuery.height * 0.05,
+              height: _mediaQuery.height * 0.05, 
               child: ElevatedButton(
                 onPressed: () {
                   if (_bookCount >= 15){

@@ -1,6 +1,7 @@
 import 'package:dump/resources/colors/dump_colors.dart';
 import 'package:dump/resources/icons/dump_icons.dart';
 import 'package:dump/resources/texts/texts.dart';
+import 'package:dump/sellbook_page2.dart';
 import 'package:flutter/material.dart';
 
 import '../../account_page.dart';
@@ -22,7 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: HomePage(),
     ),
     Center(
-      child: SellBooksPage(),
+      child: SellBookPage2(),
     ),
     const Center(
       child: PickupPage(),
